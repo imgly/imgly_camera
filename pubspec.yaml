@@ -1,6 +1,6 @@
 name: imgly_camera
 description: Camera SDK for Flutter - unlock the full potential of video creation in your app.
-version: 1.75.1
+version: 1.76.0
 homepage: https://img.ly
 environment:
   sdk: '>=3.0.0 <4.0.0'
