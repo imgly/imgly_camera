@@ -11,17 +11,18 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
+import ly.img.camera.core.CameraConfiguration
 import ly.img.camera.core.CameraMode
 import ly.img.camera.core.CameraResult
-import ly.img.camera.core.CaptureVideo
+import ly.img.camera.core.CaptureMedia
 import ly.img.camera.core.EngineConfiguration
 import ly.img.camera.flutter.plugin.model.CameraSettings
 import ly.img.camera.flutter.plugin.model.getParcelableExtraCompat
 import ly.img.camera.flutter.plugin.model.weak
 import ly.img.camera.flutter.plugin.utils.toMap
 
-/** A closure to specify a [CaptureVideo.Input] the camera session based on given *metadata*. */
-typealias CameraInputClosure = InputClosurePayload.() -> CaptureVideo.Input?
+/** A closure to specify a [CaptureMedia.Input] the camera session based on given *metadata*. */
+typealias CameraInputClosure = InputClosurePayload.() -> CaptureMedia.Input?
 
 /** A closure to add Metadata before sending the [CameraResult] to the Dart layer. */
 typealias CameraResultClosure = ResultClosurePayload.() -> Map<String, Any?>?
@@ -97,10 +98,11 @@ class IMGLYCameraPlugin :
                 videoUri = call.argument<String>("video")?.let { Uri.parse(it) },
             )
 
-            val captureVideoInput =
+            val captureMediaInput =
                 configurationClosure(inputPayload)
-                    ?: CaptureVideo.Input(
+                    ?: CaptureMedia.Input(
                         inputPayload.engineConfiguration,
+                        cameraConfiguration = settings.configuration?.toNative() ?: CameraConfiguration(),
                         cameraMode = if (inputPayload.videoUri == null) {
                             CameraMode.Standard()
                         } else {
@@ -108,7 +110,7 @@ class IMGLYCameraPlugin :
                         },
                     )
 
-            activity.startActivityForResult(CaptureVideo().createIntent(activity, captureVideoInput), REQUEST_CODE)
+            activity.startActivityForResult(CaptureMedia().createIntent(activity, captureMediaInput), REQUEST_CODE)
         } else {
             result.notImplemented()
         }
@@ -125,7 +127,7 @@ class IMGLYCameraPlugin :
             this.pendingResult = null
             this.inputMetadata = null
 
-            val cameraResult = intent?.getParcelableExtraCompat<CameraResult>(CaptureVideo.INTENT_KEY_CAMERA_RESULT)
+            val cameraResult = intent?.getParcelableExtraCompat<CameraResult>(CaptureMedia.INTENT_KEY_CAMERA_RESULT)
             if (resultCode == Activity.RESULT_OK && cameraResult != null) {
                 result.success(
                     cameraResult.toMap().also {

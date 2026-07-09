@@ -29,21 +29,23 @@ void main() {
           "metadata": metadata
         });
         final result = <String, dynamic>{
-          "recording": <String, dynamic>{
-            "recordings": [
+          "capture": <String, dynamic>{
+            "captures": [
               {
-                "videos": [
-                  {
-                    "uri": "video1.mp4",
-                    "rect": {
-                      "x": 0.0,
-                      "y": 0.0,
-                      "width": 100.0,
-                      "height": 100.0
+                "video": <String, dynamic>{
+                  "videos": [
+                    {
+                      "uri": "video1.mp4",
+                      "rect": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 100.0,
+                        "height": 100.0
+                      }
                     }
-                  }
-                ],
-                "duration": 1234.0
+                  ],
+                  "duration": 1234.0
+                }
               }
             ]
           },
@@ -69,10 +71,11 @@ void main() {
         video: "MY_VIDEO_URI", metadata: metadata);
 
     expect(result, isNotNull);
-    expect(result?.recording, isNotNull);
+    expect(result?.capture, isNotNull);
     expect(result?.reaction, isNotNull);
     expect(result?.metadata, {"key": "value"});
-    expect(result!.recording!.recordings.first.videos.first.uri, "video1.mp4");
+    expect(result!.capture!.captures.first.video!.videos.first.uri,
+        "video1.mp4");
     expect(result.reaction!.video.videos[0].uri, "reaction.mp4");
   });
 }

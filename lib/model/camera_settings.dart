@@ -1,9 +1,12 @@
+import 'camera_configuration.dart';
+
 /// A class containing all necessary settings to setup the camera.
 class CameraSettings {
   /// Creates a new instance of [CameraSettings].
   const CameraSettings({
     this.license,
     this.userId,
+    this.configuration,
   });
 
   /// The license of the editor. Pass `null` to run the SDK in evaluation mode with a watermark.
@@ -13,11 +16,17 @@ class CameraSettings {
   /// This helps us accurately calculate monthly active users (MAU).
   final String? userId;
 
+  /// Optional [CameraConfiguration] controlling how the camera captures media.
+  /// When `null`, the native defaults apply (video, multi, 5s photo clips,
+  /// mode switching allowed).
+  final CameraConfiguration? configuration;
+
   /// Converts this instance to a JSON map.
   Map<String, dynamic> toJson() {
     return {
       'license': license,
       'userId': userId,
+      if (configuration != null) 'configuration': configuration!.toJson(),
     };
   }
 
@@ -26,6 +35,10 @@ class CameraSettings {
     return CameraSettings(
       license: json['license'],
       userId: json['userId'],
+      configuration: json['configuration'] == null
+          ? null
+          : CameraConfiguration.fromJson(
+              Map<String, dynamic>.from(json['configuration'])),
     );
   }
 }

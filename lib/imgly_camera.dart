@@ -1,8 +1,14 @@
 import 'imgly_camera_platform_interface.dart';
 import 'model/camera_settings.dart';
 
+export 'model/camera_capture.dart';
+export 'model/camera_configuration.dart';
 export 'model/camera_result.dart';
 export 'model/camera_settings.dart';
+export 'model/capture.dart';
+export 'model/capture_count.dart';
+export 'model/capture_type.dart';
+export 'model/photo.dart';
 export 'model/recording.dart';
 export 'model/rect.dart';
 export 'model/video.dart';

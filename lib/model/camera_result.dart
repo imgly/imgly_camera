@@ -1,19 +1,20 @@
+import 'camera_capture.dart';
 import 'recording.dart';
 
 /// The result of a camera session.
 class CameraResult {
   /// Creates a new instance of [CameraResult].
   const CameraResult({
-    this.recording,
     this.reaction,
+    this.capture,
     required this.metadata,
   });
 
-  /// The recording result for a default camera session.
-  final CameraRecording? recording;
-
   /// The reaction result for a reaction camera session.
   final CameraReaction? reaction;
+
+  /// The capture result for a photo, video, or mixed camera session.
+  final CameraCapture? capture;
 
   /// The associated metadata.
   final Map<String, dynamic> metadata;
@@ -21,8 +22,8 @@ class CameraResult {
   /// Converts this instance to a JSON map.
   Map<String, dynamic> toJson() {
     return {
-      'recording': recording?.toJson(),
       'reaction': reaction?.toJson(),
+      'capture': capture?.toJson(),
       'metadata': metadata,
     };
   }
@@ -30,45 +31,16 @@ class CameraResult {
   /// Creates a new instance from a JSON map.
   factory CameraResult.fromJson(Map<String, dynamic> json) {
     return CameraResult(
-      recording: json['recording'] == null
-          ? null
-          : CameraRecording.fromJson(
-              Map<String, dynamic>.from(json['recording'])),
       reaction: json['reaction'] == null
           ? null
           : CameraReaction.fromJson(
               Map<String, dynamic>.from(json['reaction'])),
+      capture: json['capture'] == null
+          ? null
+          : CameraCapture.fromJson(Map<String, dynamic>.from(json['capture'])),
       metadata: json["metadata"] == null
           ? {}
           : Map<String, dynamic>.from(json['metadata']),
-    );
-  }
-}
-
-/// The result for a default camera recording session.
-class CameraRecording {
-  /// Creates a new instance of [CameraRecording].
-  const CameraRecording({
-    required this.recordings,
-  });
-
-  /// The recorded videos.
-  final List<Recording> recordings;
-
-  /// Converts this instance to a JSON map.
-  Map<String, dynamic> toJson() {
-    return {
-      'recordings': recordings.map((r) => r.toJson()).toList(),
-    };
-  }
-
-  /// Creates a new instance from a JSON map.
-  factory CameraRecording.fromJson(Map<String, dynamic> json) {
-    return CameraRecording(
-      recordings: (List<dynamic>.from(json['recordings']))
-          .map((recording) =>
-              Recording.fromJson(Map<String, dynamic>.from(recording)))
-          .toList(),
     );
   }
 }
