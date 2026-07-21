@@ -15,7 +15,7 @@ pluginManagement {
         gradlePluginPortal()
         maven {
             name "IMG.LY Artifactory"
-            url "https://artifactory.img.ly/artifactory/maven"
+            url "https://maven.img.ly/maven"
             mavenContent {
                 includeGroup("ly.img")
             }

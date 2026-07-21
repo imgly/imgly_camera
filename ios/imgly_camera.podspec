@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'imgly_camera'
-  s.version          = '1.77.0'
+  s.version          = '1.78.0'
   s.summary          = 'Camera SDK for Flutter.'
   s.homepage         = 'https://img.ly'
   s.license          = { :file => '../LICENSE' }
