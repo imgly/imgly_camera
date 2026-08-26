@@ -1,17 +1,17 @@
 PODS:
   - Flutter (1.0.0)
-  - imgly_camera (1.79.0):
+  - imgly_camera (1.78.0):
     - Flutter
-    - IMGLYCamera (= 1.79.0)
-  - IMGLYCamera (1.79.0):
-    - IMGLYCoreUI (= 1.79.0)
-  - IMGLYCore (1.79.0):
-    - IMGLYEngine (= 1.79.0)
-  - IMGLYCoreUI (1.79.0):
-    - IMGLYCore (= 1.79.0)
+    - IMGLYCamera (= 1.78.0)
+  - IMGLYCamera (1.78.0):
+    - IMGLYCoreUI (= 1.78.0)
+  - IMGLYCore (1.78.0):
+    - IMGLYEngine (= 1.78.0)
+  - IMGLYCoreUI (1.78.0):
+    - IMGLYCore (= 1.78.0)
     - Kingfisher (>= 7.10.0)
     - SwiftUIIntrospect (~> 1.1.2)
-  - IMGLYEngine (1.79.0)
+  - IMGLYEngine (1.78.0)
   - integration_test (0.0.1):
     - Flutter
   - Kingfisher (8.11.0)
@@ -40,12 +40,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
-  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  imgly_camera: ecb520cc5f92476d2ecfa656f9fcdbf8b834420b
-  IMGLYCamera: a4fee8b749f20d629dadaf5d505a0599f717142b
-  IMGLYCore: 93386a9bc8a9d9d971e3ca2d03ec469f2353cb5e
-  IMGLYCoreUI: 50c377b2f0cac1fabb9248be8c04b9ea9de91c22
-  IMGLYEngine: a5ddc61a9f40f7434b457aa1cc6ed0a45134ddd0
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  imgly_camera: e1e41eb2a29d3611595a1bdab681489a45b8ad2f
+  IMGLYCamera: 1822a19026f0b167105d50a5ca59a7f2c287beb4
+  IMGLYCore: 202b3981d74c167a54be6c451df5502389ebf6a2
+  IMGLYCoreUI: a09acb2a9c08fa33d7d9f7a715c6c785bf5ac1b2
+  IMGLYEngine: 54e3a14f894f78248391438f4b0084e04e1c374b
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
   Kingfisher: ee4ff4936d5b399164b6d01a0dfc0388583287b6
   SwiftUIIntrospect: 434b406dc6f5e30744bb6e180f90343f6a8eba8c
