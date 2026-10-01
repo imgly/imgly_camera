@@ -27,3 +27,9 @@ migrate_working_dir/
 **/doc/api/
 .dart_tool/
 build/
+
+# SwiftPM artifacts — Package.swift makes ios/imgly_camera a package root, so
+# resolving it or opening it in Xcode writes these next to the manifest.
+ios/imgly_camera/.build/
+ios/imgly_camera/.swiftpm/
+ios/imgly_camera/Package.resolved
