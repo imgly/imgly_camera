@@ -1,7 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id "com.android.application"
-    id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "org.jetbrains.kotlin.plugin.compose"
+    // The Flutter Gradle Plugin must be applied after the Android Gradle plugin.
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -23,9 +25,17 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
+def getSdkVersion(String overrideProperty, int fallback) {
+    def override = project.findProperty(overrideProperty)
+    return override == null ? fallback : Math.max(fallback, override.toString().toInteger())
+}
+
+def compileSdkVersion = getSdkVersion("ly.img.flutter.compileSdkVersionOverride", flutter.compileSdkVersion)
+def targetSdkVersion = getSdkVersion("ly.img.flutter.targetSdkVersionOverride", flutter.targetSdkVersion)
+
 android {
     namespace = "ly.img.camera.flutter.imgly_camera_example"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = compileSdkVersion
     ndkVersion = "26.1.10909125"
 
     compileOptions {
@@ -33,16 +43,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
     defaultConfig {
         applicationId = "ly.img.camera.flutter.imgly_camera_example"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = 24
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }
@@ -56,15 +62,16 @@ android {
     }
 
     buildFeatures {
-      compose true
+        compose true
     }
+}
 
-    composeOptions {
-      kotlinCompilerExtensionVersion = "1.5.3"
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_1_8
     }
 }
 
 flutter {
     source = "../.."
 }
-

@@ -4,13 +4,13 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'imgly_camera'
-  s.version          = '1.79.0'
+  s.version          = '1.84.0-rc.0'
   s.summary          = 'Camera SDK for Flutter.'
   s.homepage         = 'https://img.ly'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'IMG.LY GmbH' => 'contact@img.ly' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'imgly_camera/Sources/imgly_camera/**/*.swift'
 
   s.dependency 'Flutter'
   s.dependency 'IMGLYCamera', s.version.to_s
