@@ -5,6 +5,29 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+def getKotlinVersion() {
+    return project.plugins.findPlugin("kotlin-android")?.class?.package?.implementationVersion
+}
+
+def isKotlin2OrHigher() {
+    def kotlinVersion = getKotlinVersion()
+    if (kotlinVersion) {
+        def mainVersion = kotlinVersion.split('-')[0]
+        def versionParts = mainVersion.tokenize('.').collect { it.toInteger() }
+        return versionParts[0] >= 2
+    }
+    return false
+}
+
+// Kotlin 2 (the effective version under Flutter 3.44+) requires the Compose Compiler Gradle
+// plugin when compose is enabled; older Kotlin keeps the composeOptions block below. This
+// adapted from the imgly plugins' own android/build.gradle — without their
+// UnknownPluginException guard, because settings.gradle here declares the plugin
+// (apply false), so it is always on the classpath.
+if (isKotlin2OrHigher()) {
+    project.plugins.apply('org.jetbrains.kotlin.plugin.compose')
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
@@ -59,8 +82,10 @@ android {
       compose true
     }
 
-    composeOptions {
-      kotlinCompilerExtensionVersion = "1.5.3"
+    if (!isKotlin2OrHigher()) {
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.5.3"
+        }
     }
 }
 
