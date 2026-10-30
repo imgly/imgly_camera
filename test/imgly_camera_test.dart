@@ -74,7 +74,8 @@ void main() {
   });
 
   group("Photo JSON", () {
-    test('Photo.toJson / fromJson round-trip - single image (standard mode)', () {
+    test('Photo.toJson / fromJson round-trip - single image (standard mode)',
+        () {
       const photo = Photo(
         images: [
           PhotoImage(
@@ -95,7 +96,9 @@ void main() {
       expect(parsed.images.first.rect.height, photo.images.first.rect.height);
     });
 
-    test('Photo.toJson / fromJson round-trip - two images (dual-camera vertical)', () {
+    test(
+        'Photo.toJson / fromJson round-trip - two images (dual-camera vertical)',
+        () {
       const photo = Photo(
         images: [
           PhotoImage(
@@ -127,7 +130,12 @@ void main() {
                 "images": [
                   {
                     "uri": "PHOTO_URI",
-                    "rect": {"x": 0.0, "y": 0.0, "width": 1080.0, "height": 1920.0}
+                    "rect": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 1080.0,
+                      "height": 1920.0
+                    }
                   }
                 ],
                 "duration": 5000.0,
@@ -138,7 +146,12 @@ void main() {
                 "videos": [
                   {
                     "uri": "VIDEO_URI",
-                    "rect": {"x": 0.0, "y": 0.0, "width": 1080.0, "height": 1920.0}
+                    "rect": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 1080.0,
+                      "height": 1920.0
+                    }
                   }
                 ],
                 "duration": 3000.0,

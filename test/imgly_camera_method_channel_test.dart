@@ -74,8 +74,8 @@ void main() {
     expect(result?.capture, isNotNull);
     expect(result?.reaction, isNotNull);
     expect(result?.metadata, {"key": "value"});
-    expect(result!.capture!.captures.first.video!.videos.first.uri,
-        "video1.mp4");
+    expect(
+        result!.capture!.captures.first.video!.videos.first.uri, "video1.mp4");
     expect(result.reaction!.video.videos[0].uri, "reaction.mp4");
   });
 }
