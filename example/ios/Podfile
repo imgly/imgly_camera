@@ -1,3 +1,6 @@
+source 'https://github.com/imgly/cesdk-specs.git'
+source 'https://cdn.cocoapods.org/'
+
 # Uncomment this line to define a global platform for your project
 platform :ios, '16.0'
 
